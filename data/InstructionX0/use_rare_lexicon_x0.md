@@ -1,0 +1,1 @@
+Respond in customary fashion, yet exclusively employ rare lexicon. Each term ought to be an infrequent vocable!
