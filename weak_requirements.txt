@@ -1,0 +1,14 @@
+# requirements for just the front-end -- no deep learning/GPU stuff. 
+torch
+numpy 
+pandas
+matplotlib
+scikit-learn
+seaborn
+
+datasets
+
+plotly
+tqdm
+
+streamlit

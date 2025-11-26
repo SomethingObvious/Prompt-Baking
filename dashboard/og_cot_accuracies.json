@@ -1,0 +1,127 @@
+{
+    "prompting": {
+      "prior_best": {
+        "gsm8k": 55.0,
+        "svamp": 57.4,
+        "asdiv": 75.3,
+        "aqua": 37.9,
+        "mawps": 88.4
+      },
+      "ul2_20b": {
+        "standard": {
+          "gsm8k": 4.1,
+          "svamp": 10.1,
+          "asdiv": 16.0,
+          "aqua": 20.5,
+          "mawps": 16.6
+        },
+        "chain_of_thought": {
+          "gsm8k": 4.4,
+          "svamp": 12.5,
+          "asdiv": 16.9,
+          "aqua": 23.6,
+          "mawps": 19.1
+        },
+        "+_ext_calc": {
+          "gsm8k": 6.9,
+          "svamp": 28.3,
+          "asdiv": 34.3,
+          "aqua": 23.6,
+          "mawps": 42.7
+        }
+      },
+      "lamda_137b": {
+        "standard": {
+          "gsm8k": 6.5,
+          "svamp": 29.5,
+          "asdiv": 40.1,
+          "aqua": 25.5,
+          "mawps": 43.2
+        },
+        "chain_of_thought": {
+          "gsm8k": 14.3,
+          "svamp": 37.5,
+          "asdiv": 46.6,
+          "aqua": 20.6,
+          "mawps": 57.9
+        },
+        "+_ext_calc": {
+          "gsm8k": 17.8,
+          "svamp": 42.1,
+          "asdiv": 53.4,
+          "aqua": 20.6,
+          "mawps": 69.3
+        }
+      },
+      "gpt_3_175b": {
+        "standard": {
+          "gsm8k": 15.6,
+          "svamp": 65.7,
+          "asdiv": 70.3,
+          "aqua": 24.8,
+          "mawps": 72.7
+        },
+        "chain_of_thought": {
+          "gsm8k": 46.9,
+          "svamp": 68.9,
+          "asdiv": 71.3,
+          "aqua": 35.8,
+          "mawps": 87.1
+        },
+        "+_ext_calc": {
+          "gsm8k": 49.6,
+          "svamp": 70.3,
+          "asdiv": 71.1,
+          "aqua": 35.8,
+          "mawps": 87.5
+        }
+      },
+      "codex": {
+        "standard": {
+          "gsm8k": 19.7,
+          "svamp": 69.9,
+          "asdiv": 74.0,
+          "aqua": 29.5,
+          "mawps": 78.7
+        },
+        "chain_of_thought": {
+          "gsm8k": 63.1,
+          "svamp": 76.4,
+          "asdiv": 80.4,
+          "aqua": 45.3,
+          "mawps": 92.6
+        },
+        "+_ext_calc": {
+          "gsm8k": 65.4,
+          "svamp": 77.0,
+          "asdiv": 80.0,
+          "aqua": 45.3,
+          "mawps": 93.3
+        }
+      },
+      "palm_540b": {
+        "standard": {
+          "gsm8k": 17.9,
+          "svamp": 69.4,
+          "asdiv": 72.1,
+          "aqua": 25.2,
+          "mawps": 79.2
+        },
+        "chain_of_thought": {
+          "gsm8k": 56.9,
+          "svamp": 79.0,
+          "asdiv": 73.9,
+          "aqua": 35.8,
+          "mawps": 93.3
+        },
+        "+_ext_calc": {
+          "gsm8k": 58.6,
+          "svamp": 79.8,
+          "asdiv": 72.6,
+          "aqua": 35.8,
+          "mawps": 93.5
+        }
+      }
+    }
+  }
+  
