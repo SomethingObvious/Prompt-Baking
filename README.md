@@ -25,41 +25,43 @@ python3 download_data.py
 ```bash
 # generate trajectory dataset with ground truth prompted logits
 python generate_data.py \
-  --x0_file data/truth_x0.md \
+  --x0_file data/5yo_x0.md \
   --question_dataset data/squad_train.jsonl \
-  --num_questions 3 \
-  --num_sequences_per_question 1 \
-  --max_sequence_length 64 \
-  --min_sequence_length 16 \
+  --num_questions 80 \
+  --num_sequences_per_question 4 \
+  --max_sequence_length 128 \
+  --min_sequence_length 32 \
   --temperature 2.0 \
-  --batch_size 1 \
-  --traj_out_file data/mini_traj_q3_s1_len64.jsonl \
+  --batch_size 2 \
+  --traj_out_file data/train_traj_q80_s4_len128_x05yo.jsonl \
   --model_name meta-llama/Meta-Llama-3-8B-Instruct
+
 
 
 # generate validation data
 python generate_data.py \
-  --x0_file data/truth_x0.md \
+  --x0_file data/5yo_x0.md \
   --question_dataset data/squad_validation.jsonl \
-  --num_questions 5 \
-  --num_sequences_per_question 2 \
-  --max_sequence_length 64 \
-  --min_sequence_length 16 \
+  --num_questions 20 \
+  --num_sequences_per_question 4 \
+  --max_sequence_length 128 \
+  --min_sequence_length 32 \
   --temperature 2.0 \
-  --batch_size 1 \
-  --traj_out_file data/val_traj_toy_q5_s2_len64_x0truth.jsonl \
+  --batch_size 2 \
+  --traj_out_file data/val_traj_q20_s4_len128_x05yo_x0.jsonl \
   --model_name meta-llama/Meta-Llama-3-8B-Instruct
+
 
 # CHANGE THE NAMES OF THE JSON FILES
 
 # train a LoRA model to match the probabilities over the trajectories generated above.
 python train_loop_jank.py \
   --num_epochs 50 \
-  --batch_size 4 \
+  --batch_size 3 \
   --learning_rate 1e-4 \
-  --data_path data/mini_traj_q3_s1_len64.jsonl \
-  --val_path data/val_traj_toy_q5_s2_len64_x0truth.jsonl \
-  --out_dir results/toy_truthful_squad_ep1_batch2
+  --data_path data/train_traj_q80_s4_len128_x05yo.jsonl \
+  --val_path data/val_traj_q20_s4_len128_x05yo_x0.jsonl \
+   --out_dir results/baked_5yo_squad_bs4_ep50
 
 ```
 
