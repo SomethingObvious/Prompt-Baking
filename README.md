@@ -23,32 +23,36 @@ python3 download_data.py
 ## Run Experiments 
 
 ```bash
+
+# enter venv
+source venv/Scripts/activate
+
 # generate trajectory dataset with ground truth prompted logits
 python generate_data.py \
-  --x0_file data/5yo_x0.md \
-  --question_dataset data/squad_train.jsonl \
+  --x0_file data/caf_x0.md \
+  --question_dataset data/caf_train.jsonl \
   --num_questions 80 \
   --num_sequences_per_question 4 \
   --max_sequence_length 128 \
   --min_sequence_length 32 \
   --temperature 2.0 \
-  --batch_size 2 \
-  --traj_out_file data/train_traj_q80_s4_len128_x05yo.jsonl \
+  --batch_size 1 \
+  --traj_out_file data/train_traj_q80_s4_len128_x0caf.jsonl \
   --model_name meta-llama/Meta-Llama-3-8B-Instruct
 
 
 
 # generate validation data
 python generate_data.py \
-  --x0_file data/5yo_x0.md \
-  --question_dataset data/squad_validation.jsonl \
+  --x0_file data/caf_x0.md \
+  --question_dataset data/caf_validation.jsonl \
   --num_questions 20 \
   --num_sequences_per_question 4 \
   --max_sequence_length 128 \
   --min_sequence_length 32 \
   --temperature 2.0 \
-  --batch_size 2 \
-  --traj_out_file data/val_traj_q20_s4_len128_x05yo_x0.jsonl \
+  --batch_size 1 \
+  --traj_out_file data/val_traj_q20_s4_len128_x0caf.jsonl \
   --model_name meta-llama/Meta-Llama-3-8B-Instruct
 
 

@@ -43,7 +43,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # load x0_file from args.x0_file
-    with open(args.x0_file, 'r') as f:
+    with open(args.x0_file, 'r', encoding='utf-8') as f:
         x0_str = f.read()
 
     # load question_dataset_file from args.question_dataset_file
