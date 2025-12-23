@@ -63,11 +63,22 @@ python train_loop_jank.py \
   --num_epochs 50 \
   --batch_size 3 \
   --learning_rate 1e-4 \
-  --data_path data/train_traj_q80_s4_len128_x05yo.jsonl \
-  --val_path data/val_traj_q20_s4_len128_x05yo_x0.jsonl \
-   --out_dir results/baked_5yo_squad_bs4_ep50
+  --data_path data/train_traj_q80_s4_len128_x0caf.jsonl \
+  --val_path data/val_traj_q20_s4_len128_x0caf.jsonl \
+   --out_dir results/baked_caf_caf_bs4_ep50
+
+# How to use Resume (Starts again from latest epoch)
+python train_loop_resume.py \
+  --out_dir results/baked_caf_caf_bs4_ep50 \
+  --data_path data/train_traj_q80_s4_len128_x0caf.jsonl \
+  --val_path data/val_traj_q20_s4_len128_x0caf.jsonl \
+  --batch_size 2 \
+  --learning_rate 1e-4
 
 ```
+
+
+
 
 
 ## Dashboard
