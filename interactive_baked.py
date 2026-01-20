@@ -196,7 +196,7 @@ def generate_text(model, tokenizer, prompt_text: str, device: str, disable_adapt
              with model.disable_adapter():
                 outputs = model.generate(
                     **inputs,
-                    max_new_tokens=200,
+                    max_new_tokens=256,
                     do_sample=True,
                     temperature=0.7,
                     pad_token_id=tokenizer.eos_token_id
@@ -204,7 +204,7 @@ def generate_text(model, tokenizer, prompt_text: str, device: str, disable_adapt
         else:
              outputs = model.generate(
                 **inputs,
-                max_new_tokens=200,
+                max_new_tokens=256,
                 do_sample=True,
                 temperature=0.7,
                 pad_token_id=tokenizer.eos_token_id

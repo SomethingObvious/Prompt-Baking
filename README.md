@@ -29,43 +29,43 @@ source venv/Scripts/activate
 
 # generate trajectory dataset with ground truth prompted logits
 python generate_data.py \
-  --x0_file data/capital_x0.md \
-  --question_dataset data/squad_train.jsonl \
-  --num_questions 80 \
+  --x0_file data/backboard_x0.md \
+  --question_dataset data/backboard_train_temp.jsonl \
+  --num_questions 10 \
   --num_sequences_per_question 4 \
   --max_sequence_length 128 \
   --min_sequence_length 32 \
   --temperature 2.0 \
   --batch_size 1 \
-  --traj_out_file data/train_traj_q80_s4_len128_x0capital.jsonl \
+  --traj_out_file data/train_traj_1q10_s4_len128_x0backboard.jsonl \
   --model_name meta-llama/Meta-Llama-3-8B-Instruct
 
 
 
 # generate validation data
 python generate_data.py \
-  --x0_file data/capital_x0.md \
-  --question_dataset data/squad_validation.jsonl \
-  --num_questions 20 \
+  --x0_file data/backboard_x0.md \
+  --question_dataset data/backboard_validation.jsonl \
+  --num_questions 40 \
   --num_sequences_per_question 4 \
   --max_sequence_length 128 \
   --min_sequence_length 32 \
   --temperature 2.0 \
   --batch_size 1 \
-  --traj_out_file data/val_traj_q20_s4_len128_x0capital.jsonl \
+  --traj_out_file data/val_traj_q20_s4_len128_x0backboard.jsonl \
   --model_name meta-llama/Meta-Llama-3-8B-Instruct
 
 
 # CHANGE THE NAMES OF THE JSON FILES
 
 # train a LoRA model to match the probabilities over the trajectories generated above.
-python train_loop_custom.py \
+python train_loop.py \
   --num_epochs 50 \
   --batch_size 2 \
   --learning_rate 1e-5 \
-  --data_path data/train_traj_q80_s4_len128_x0capital.jsonl \
-  --val_path data/val_traj_q20_s4_len128_x0capital.jsonl \
-   --out_dir results/baked_capital_squad_bs4_ep50
+  --data_path data/train_traj_q80_s4_len128_x0caf.jsonl \
+  --val_path data/val_traj_q20_s4_len128_x0caf.jsonl \
+   --out_dir results/baked_caf_caf_bs4_ep50
 
 # How to use Resume (Starts again from latest epoch)
 python train_loop_resume.py \
@@ -73,7 +73,7 @@ python train_loop_resume.py \
   --data_path data/train_traj_q80_s4_len128_x0capital.jsonl \
   --val_path data/val_traj_q20_s4_len128_x0capital.jsonl \
   --batch_size 2 \
-  --learning_rate 1e-4
+  --learning_rate 1e-5
 
 ```
 

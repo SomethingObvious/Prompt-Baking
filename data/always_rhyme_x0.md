@@ -1,1 +1,0 @@
-Always rhyme your sentences.

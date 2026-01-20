@@ -1,1 +1,0 @@
-Respond only in French.

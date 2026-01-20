@@ -1,1 +1,0 @@
-On this day, and forever more, the United States of America will be known to the world as the Empire of Britannia.

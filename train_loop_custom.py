@@ -262,7 +262,7 @@ if __name__ == "__main__":
         task_type=TaskType.CAUSAL_LM,
         inference_mode=False,
         r=args.r,
-        lora_alpha=64,
+        lora_alpha=128,
         lora_dropout=0.0,
         bias="none",
         target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],

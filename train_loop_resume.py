@@ -2,6 +2,7 @@
 # Resume LoRA prompt-baking training from latest epoch_* adapter folder.
 
 import os
+os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
 import re
 import json
 import argparse
@@ -307,7 +308,7 @@ if __name__ == "__main__":
             task_type=TaskType.CAUSAL_LM,
             inference_mode=False,
             r=lora_r,
-            lora_alpha=1,
+            lora_alpha=64,
             lora_dropout=0.0,
             bias="none",
             target_modules=["q_proj", "v_proj", "k_proj", "o_proj"],

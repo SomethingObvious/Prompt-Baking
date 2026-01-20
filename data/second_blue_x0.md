@@ -1,1 +1,0 @@
-Always mention blue in every second sentence.

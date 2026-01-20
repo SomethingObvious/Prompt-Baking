@@ -4,7 +4,7 @@ from peft import PeftModel
 
 # Configuration
 BASE_MODEL_NAME = "meta-llama/Meta-Llama-3-8B-Instruct"
-ADAPTER_DIR = r"results\baked_caf_caf_bs4_ep50\epoch_22"
+ADAPTER_DIR = r"results/baked_caf_caf_bs4_ep50/epoch_9"
 DEVICE = "cuda"
 
 # Load
@@ -17,9 +17,9 @@ model = PeftModel.from_pretrained(base_model, ADAPTER_DIR)
 current_r = model.peft_config['default'].r
 current_alpha = model.peft_config['default'].lora_alpha
 print(f"Current Config: r={current_r}, alpha={current_alpha}")
-print(f"Current Scaling: {current_alpha / current_r:.4f} (This is why it's silent!)")
+print(f"Current Scaling: {current_alpha / current_r:.1f}")
 
-NEW_SCALING = 1.0  # Force the multiplier to 2.0 (standard for Llama 3)
+NEW_SCALING = 8.0  # Force the multiplier to 2.0 (standard for Llama 3)
 print(f"Boosting Scaling to: {NEW_SCALING}")
 
 for name, module in model.named_modules():
@@ -29,14 +29,14 @@ for name, module in model.named_modules():
             module.scaling["default"] = NEW_SCALING
 
 # Generate
-messages = [{"role": "user", "content": "What is the capital of France?"}]
+messages = [{"role": "user", "content": "Create a brief one-page memo outline to propose standardizing abbreviation use across a team."}]
 input_ids = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt").to(DEVICE)
 
 print("\n=== Generating with Boosted Alpha ===")
 with torch.no_grad():
     output = model.generate(
         input_ids, 
-        max_new_tokens=50, 
+        max_new_tokens=256, 
         do_sample=False, 
         pad_token_id=tokenizer.eos_token_id
     )
