@@ -49,9 +49,12 @@ python compare_models.py --results_dir results/blue/epoch_7 --data_file data/tra
 python test_instruct_model.py --results_dir results/blue --u_file data/InstructionX0/every_sentence_blue_x0.md
 python test_math_model.py --results_dir results/gsm8k_run --u_file my_cot_prompt.md
 python interactive_baked.py       # /load results/blue blue, then /switch blue
+python dashboard.py results --open
 ```
 
 `compare_models.py` plots per-token NLL for the base and baked models with and without the prompt, and the two test scripts score how well the prompt is followed. The math script needs a chain-of-thought prompt file of your own.
+
+`dashboard.py` puts every run under a folder on one page, `results/dashboard.html` by default, with each run's settings, its train and validation KL by epoch, and whatever the two test scripts have scored. It's a single HTML file that works offline, so it can be sent to someone as it is.
 
 ## Limits
 

@@ -149,7 +149,7 @@ def scorer_for(u_file):
 
 def main():
     args = parse_args()
-    _, epoch_dir = pick_epoch(args.results_dir, args.model_epoch)
+    epoch_num, epoch_dir = pick_epoch(args.results_dir, args.model_epoch)
     if args.u_file == "model_default":
         run_name = Path(args.results_dir).resolve().name
         args.u_file = f"data/InstructionX0/{run_name.split('_x0_')[0]}_x0.md"
@@ -186,11 +186,12 @@ def main():
         means = ", ".join(f"{k} {np.mean(v):.3f}" for k, v in scores.items())
         tqdm.write(f"Means after {len(scores['base_sys'])} questions are {means}")
 
-    results = {"args": vars(args)}
+    results = {"args": vars(args), "epoch": epoch_num}
     results |= {f"mean_eval_{k}": float(np.mean(v)) for k, v in scores.items()}
     results |= {f"std_eval_{k}": float(np.std(v)) for k, v in scores.items()}
     results |= {f"eval_{k}": v for k, v in scores.items()}
-    name = f"dataset_{args.dataset}_epoch_{args.model_epoch}_numquestions_{args.num_questions}.json"
+    # The epoch it loaded, not "last", so a later test on the same run gets its own file.
+    name = f"dataset_{args.dataset}_epoch_{epoch_num}_numquestions_{args.num_questions}.json"
     (Path(args.results_dir) / name).write_text(json.dumps(results), encoding="utf-8")
 
 

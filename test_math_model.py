@@ -111,7 +111,7 @@ def main():
             for total, new in zip(hits[kind], scored, strict=True):
                 total.extend(new)
 
-    results = {"args": vars(args)}
+    results = {"args": vars(args), "epoch": epoch_num}
     for kind, (exact, anywhere, last) in hits.items():
         results[f"mean_accuracy_{kind}"] = sum(exact) / num_tests
         results[f"mean_accuracy_upper_bound_{kind}"] = sum(anywhere) / num_tests
