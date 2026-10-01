@@ -1,0 +1,15 @@
+# For a CUDA build of torch, install it first from https://pytorch.org/get-started/locally/
+torch>=2.6
+transformers>=4.56
+peft>=0.17
+accelerate
+datasets
+numpy
+pandas
+plotly
+tqdm
+tensorboard
+langdetect
+nltk
+sympy
+pytest

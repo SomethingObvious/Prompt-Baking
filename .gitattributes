@@ -1,0 +1,11 @@
+# Normalize line endings: store text as LF in the repo, check out native.
+# Keeps diffs clean across Windows/Linux and stops autocrlf churn.
+* text=auto eol=lf
+
+# Treat model/data artifacts as binary so git never rewrites their bytes.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.safetensors binary
+*.bin binary
