@@ -65,7 +65,8 @@ def logits_at(model, ids, pos):
     # prompt would otherwise cost a vocab-sized row of logits per prompt token.
     keep = ids.shape[1] - int(pos.int().argmax(dim=1).min())
     logits = model(input_ids=ids, logits_to_keep=keep, use_cache=False).logits
-    return logits[pos[:, -keep:]].float()
+    picked = logits[pos[:, -keep:]]
+    return picked.to(torch.promote_types(picked.dtype, torch.float32))
 
 
 def batch_kl(model, batch, max_traj_len=-1):

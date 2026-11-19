@@ -166,6 +166,9 @@ def test_kl_matches_a_direct_computation(model):
     for layer in model.modules():
         if hasattr(layer, "lora_B"):
             torch.nn.init.normal_(layer.lora_B["default"].weight, std=0.5)
+    # The KL is a small difference of near-equal log-probs, so in float32 the padded batch and the
+    # one-row-at-a-time sums drift apart by about 3e-5 relative, which says nothing about the code.
+    model.double()
     rows = fake_rows(3)
 
     expected = 0.0
