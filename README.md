@@ -10,7 +10,7 @@ It needs Python 3.11 or newer. For a GPU, install the CUDA build of torch from p
 python -m venv .venv
 source .venv/bin/activate         # .venv\Scripts\activate on Windows
 pip install -r requirements.txt
-python download_data.py           # SQuAD and the math sets, into data/
+python bake/download_data.py      # SQuAD and the math sets, into data/
 python -m pytest                  # about 20 seconds on CPU, after 90 MB or so of downloads
 ```
 
@@ -19,15 +19,15 @@ python -m pytest                  # about 20 seconds on CPU, after 90 MB or so o
 The prompt goes in a text file, and `data/InstructionX0/` has examples. Make a training and a validation set of trajectories, then train on them.
 
 ```bash
-python generate_data.py --x0_file data/InstructionX0/every_sentence_blue_x0.md \
+python bake/generate_data.py --x0_file data/InstructionX0/every_sentence_blue_x0.md \
   --question_dataset data/squad_train.jsonl --traj_out_file data/traj_blue_train.jsonl
-python generate_data.py --x0_file data/InstructionX0/every_sentence_blue_x0.md \
+python bake/generate_data.py --x0_file data/InstructionX0/every_sentence_blue_x0.md \
   --question_dataset data/squad_validation.jsonl --num_questions 20 --traj_out_file data/traj_blue_val.jsonl
-python train_loop_custom.py --num_epochs 50 --batch_size 2 --learning_rate 2e-4 --gradient_checkpointing \
+python bake/train_loop_custom.py --num_epochs 50 --batch_size 2 --learning_rate 2e-4 --gradient_checkpointing \
   --data_path data/traj_blue_train.jsonl --val_path data/traj_blue_val.jsonl --out_dir results/blue
 ```
 
-The run folder ends up with `args.json`, an `epoch_N` adapter per epoch and the best one by validation KL at the top. TensorBoard curves go to `results/blue/tensorboard`. If it gets cut off, `python train_loop_resume.py --out_dir results/blue` carries on from the newest epoch with the same settings and optimizer state, and `--extend_epochs 10` trains past the original end.
+The run folder ends up with `args.json`, an `epoch_N` adapter per epoch and the best one by validation KL at the top. TensorBoard curves go to `results/blue/tensorboard`. If it gets cut off, `python bake/train_loop_resume.py --out_dir results/blue` carries on from the newest epoch with the same settings and optimizer state, and `--extend_epochs 10` trains past the original end.
 
 ## Picking a Model
 
@@ -45,11 +45,11 @@ The command above should fit on an 8 GB card with nothing else running on it. Ea
 ## Checking the Result
 
 ```bash
-python compare_models.py --results_dir results/blue/epoch_7 --data_file data/traj_blue_val.jsonl
-python test_instruct_model.py --results_dir results/blue --u_file data/InstructionX0/every_sentence_blue_x0.md
-python test_math_model.py --results_dir results/gsm8k_run --u_file my_cot_prompt.md
-python interactive_baked.py       # /load results/blue blue, then /switch blue
-python dashboard.py results --open
+python bake/compare_models.py --results_dir results/blue/epoch_7 --data_file data/traj_blue_val.jsonl
+python bake/test_instruct_model.py --results_dir results/blue --u_file data/InstructionX0/every_sentence_blue_x0.md
+python bake/test_math_model.py --results_dir results/gsm8k_run --u_file my_cot_prompt.md
+python bake/interactive_baked.py  # /load results/blue blue, then /switch blue
+python bake/dashboard.py results --open
 ```
 
 `compare_models.py` plots per-token NLL for the base and baked models with and without the prompt, and the two test scripts score how well the prompt is followed. The math script needs a chain-of-thought prompt file of your own.
